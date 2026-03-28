@@ -18,7 +18,7 @@ export interface BrandInfo {
 }
 
 export interface SocialLink {
-  platform: "instagram" | "facebook" | "tiktok" | "google_maps";
+  platform: "instagram" | "facebook" | "tiktok" | "google_maps" | "whatsapp";
   label: string;
   href: string;
 }
@@ -171,6 +171,7 @@ export interface ContactInfoBlock {
   iconName: string;
   title: string;
   details: string[];
+  href?: string; // clickable link (tel:, mailto:, https://wa.me/, etc.)
 }
 
 export interface ContactFormField {

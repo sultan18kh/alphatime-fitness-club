@@ -10,7 +10,7 @@ const heroLogo = "/images/logo_circle.png";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-14">
+    <section className="relative min-h-svh flex items-center justify-center overflow-hidden px-4 pt-20 pb-8 sm:px-6 sm:pt-28 sm:pb-14">
       <div className="absolute inset-0 bg-gradient-to-br from-black via-dark to-black" />
 
       {hero.backgroundImage && (
@@ -54,17 +54,18 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <div className="mb-6 flex items-center justify-center gap-5 sm:gap-7 md:gap-10 lg:gap-12">
+        {/* Stacked on mobile, side-by-side on md+ */}
+        <div className="mb-4 sm:mb-6 flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-5 md:gap-10 lg:gap-12">
           {brand.logo && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.85, x: -24 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
               className="shrink-0"
             >
               <div
                 className="relative overflow-hidden rounded-full border border-mustard/25 bg-black/55 shadow-[0_0_40px_rgba(212,160,23,0.18)] backdrop-blur-md"
-                style={{ width: "clamp(6rem, 25vh, 19rem)", height: "clamp(6rem, 25vh, 19rem)" }}
+                style={{ width: "clamp(6rem, 28vh, 19rem)", height: "clamp(6rem, 28vh, 19rem)" }}
               >
                 <div className="absolute inset-[10%] overflow-hidden rounded-full">
                   <Image
@@ -72,7 +73,7 @@ export default function Hero() {
                     alt={`${brand.name} ${brand.subtitle} logo`}
                     fill
                     priority
-                    sizes="(max-width: 640px) 72px, (max-width: 768px) 88px, (max-width: 1024px) 104px, (max-width: 1280px) 224px, 256px"
+                    sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, (max-width: 1024px) 128px, (max-width: 1280px) 272px, 304px"
                     className="object-contain"
                   />
                 </div>
@@ -81,8 +82,8 @@ export default function Hero() {
             </motion.div>
           )}
 
-          <div className="min-w-0 text-left">
-            <div className="overflow-hidden mb-2">
+          <div className="min-w-0 text-center md:text-left">
+            <div className="overflow-hidden mb-1 sm:mb-2">
               <motion.h1
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
@@ -98,7 +99,8 @@ export default function Hero() {
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem] leading-[0.85] gradient-text"
+                className="font-[family-name:var(--font-bebas-neue)] leading-[0.85] gradient-text"
+                style={{ fontSize: "clamp(3rem, 13vh, 10rem)" }}
               >
                 {hero.headingLine2}
               </motion.h1>
@@ -110,7 +112,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-gray-text text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed"
+          className="text-gray-text text-sm sm:text-lg md:text-xl max-w-2xl mx-auto mb-5 sm:mb-8 md:mb-10 leading-relaxed"
         >
           {hero.description}
         </motion.p>
@@ -143,7 +145,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.8 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14"
+          className="mt-6 sm:mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14"
         >
           {hero.stats.map((stat) => (
             <div key={stat.label} className="text-center">
@@ -162,7 +164,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 sm:bottom-8"
+        className="absolute bottom-3 left-1/2 -translate-x-1/2 hidden sm:flex sm:bottom-6"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

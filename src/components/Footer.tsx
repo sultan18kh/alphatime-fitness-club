@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Dumbbell, MapPin } from "lucide-react";
-import { InstagramIcon, FacebookIcon, TikTokIcon } from "./SocialIcons";
+import { InstagramIcon, FacebookIcon, TikTokIcon, WhatsAppIcon } from "./SocialIcons";
 import { siteContent } from "@/data/content";
 import type { ComponentType } from "react";
 
@@ -13,6 +13,7 @@ const socialIconMap: Record<string, ComponentType<{ className?: string }>> = {
   instagram: InstagramIcon,
   facebook: FacebookIcon,
   tiktok: TikTokIcon,
+  whatsapp: WhatsAppIcon,
   google_maps: MapPin,
 };
 

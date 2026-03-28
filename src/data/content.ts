@@ -438,6 +438,7 @@ export const siteContent: SiteContent = {
           "Ali View Garden, Nadirabad",
           "Lahore 54000, Pakistan",
         ],
+        href: "https://share.google/lVrFAL37AdFCGKQVt",
       },
       {
         iconName: "Clock",
@@ -449,12 +450,28 @@ export const siteContent: SiteContent = {
       },
       {
         iconName: "Phone",
-        title: "CONTACT",
-        details: [
-          "Call for inquiries",
-          "DM us on Instagram",
-          "@alphatimefitnessclub",
-        ],
+        title: "PHONE",
+        details: ["+92 318 403 2008"],
+        href: "tel:+923184032008",
+      },
+      {
+        iconName: "MessageCircle",
+        title: "WHATSAPP",
+        details: ["+92 318 403 2008"],
+        href: "https://wa.me/923184032008",
+      },
+      {
+        iconName: "Mail",
+        title: "EMAIL",
+        // TODO: Replace with actual email if needed, or remove if not accepting email inquiries.
+        details: ["alphatimefitnessclub@gmail.com"],
+        href: "mailto:alphatimefitnessclub@gmail.com",
+      },
+      {
+        iconName: "Instagram",
+        title: "INSTAGRAM",
+        details: ["@alphatimefitnessclub"],
+        href: "https://www.instagram.com/alphatimefitnessclub/",
       },
     ],
     mapEmbedUrl:
@@ -462,7 +479,7 @@ export const siteContent: SiteContent = {
     formFields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your name", colSpan: 2 },
       { name: "email", label: "Email", type: "email", placeholder: "your@email.com", colSpan: 1 },
-      { name: "phone", label: "Phone", type: "tel", placeholder: "+92 300 1234567", colSpan: 1 },
+      { name: "phone", label: "Phone", type: "tel", placeholder: "+92 318 4032008", colSpan: 1 },
       { name: "message", label: "Message", type: "textarea", placeholder: "Tell us about your fitness goals...", colSpan: 2 },
     ],
     interests: [
