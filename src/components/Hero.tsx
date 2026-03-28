@@ -1,15 +1,25 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { siteContent } from "@/data/content";
+
+const { hero, brand } = siteContent;
+const heroLogo = "/images/logo_circle.png";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated background gradient */}
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 pt-24 pb-12 sm:px-6 sm:pt-28 sm:pb-14">
       <div className="absolute inset-0 bg-gradient-to-br from-black via-dark to-black" />
 
-      {/* Animated grid pattern */}
+      {hero.backgroundImage && (
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url(${hero.backgroundImage})` }}
+        />
+      )}
+
       <div className="absolute inset-0 opacity-[0.04]">
         <div
           className="w-full h-full"
@@ -21,72 +31,86 @@ export default function Hero() {
         />
       </div>
 
-      {/* Floating mustard orbs */}
       <motion.div
-        animate={{
-          y: [0, -30, 0],
-          opacity: [0.1, 0.2, 0.1],
-        }}
+        animate={{ y: [0, -30, 0], opacity: [0.1, 0.2, 0.1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-1/4 right-1/4 w-96 h-96 bg-mustard/10 rounded-full blur-[120px]"
       />
       <motion.div
-        animate={{
-          y: [0, 20, 0],
-          opacity: [0.05, 0.15, 0.05],
-        }}
+        animate={{ y: [0, 20, 0], opacity: [0.05, 0.15, 0.05] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-mustard/10 rounded-full blur-[100px]"
       />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
-        {/* Tagline */}
+      <div className="relative z-10 mx-auto w-full max-w-6xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-6"
+          className="mb-5"
         >
           <span className="inline-block px-4 py-2 border border-mustard/30 text-mustard text-xs sm:text-sm uppercase tracking-[0.4em]">
-            Where Strength Meets Discipline
+            {hero.tagline}
           </span>
         </motion.div>
 
-        {/* Main heading */}
-        <div className="overflow-hidden mb-4">
-          <motion.h1
-            initial={{ y: 120 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-[family-name:var(--font-bebas-neue)] text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[0.85] text-white"
-          >
-            BUILT FOR
-          </motion.h1>
-        </div>
-        <div className="overflow-hidden mb-8">
-          <motion.h1
-            initial={{ y: 120 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-[family-name:var(--font-bebas-neue)] text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-[0.85] gradient-text"
-          >
-            THE IRON
-          </motion.h1>
+        <div className="mb-6 flex items-center justify-center gap-5 sm:gap-7 md:gap-10 lg:gap-12">
+          {brand.logo && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, x: -24 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
+              className="shrink-0"
+            >
+              <div className="relative h-24 w-24 overflow-hidden rounded-full border border-mustard/25 bg-black/55 shadow-[0_0_40px_rgba(212,160,23,0.18)] backdrop-blur-md sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-[17rem] lg:w-[17rem] xl:h-[19rem] xl:w-[19rem]">
+                <div className="absolute inset-2.5 overflow-hidden rounded-full sm:inset-3 md:inset-3.5 lg:inset-7 xl:inset-8">
+                  <Image
+                    src={heroLogo}
+                    alt={`${brand.name} ${brand.subtitle} logo`}
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 72px, (max-width: 768px) 88px, (max-width: 1024px) 104px, (max-width: 1280px) 224px, 256px"
+                    className="object-contain"
+                  />
+                </div>
+                <div className="pointer-events-none absolute inset-2.5 z-10 rounded-full border border-mustard/12 lg:inset-4 xl:inset-5" />
+              </div>
+            </motion.div>
+          )}
+
+          <div className="min-w-0 text-left">
+            <div className="overflow-hidden mb-2">
+              <motion.h1
+                initial={{ y: 120 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem] leading-[0.85] text-white"
+              >
+                {hero.headingLine1}
+              </motion.h1>
+            </div>
+            <div className="overflow-hidden">
+              <motion.h1
+                initial={{ y: 120 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem] leading-[0.85] gradient-text"
+              >
+                {hero.headingLine2}
+              </motion.h1>
+            </div>
+          </div>
         </div>
 
-        {/* Subtext */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-gray-text text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-gray-text text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed"
         >
-          Lahore&apos;s home for real muscle building. Heavy iron, expert trainers,
-          zero excuses. For ladies &amp; gents who show up to put in the work.
+          {hero.description}
         </motion.p>
 
-        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,36 +118,30 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <motion.a
-            href="#contact"
+            href={hero.ctaPrimary.href}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212,160,23,0.3)" }}
             whileTap={{ scale: 0.95 }}
             className="px-10 py-4 bg-mustard text-black font-bold text-sm uppercase tracking-[0.2em] hover:bg-mustard-light transition-colors duration-300"
           >
-            Start Your Journey
+            {hero.ctaPrimary.label}
           </motion.a>
           <motion.a
-            href="#programs"
+            href={hero.ctaSecondary.href}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="px-10 py-4 border border-white/20 text-white font-bold text-sm uppercase tracking-[0.2em] hover:border-mustard hover:text-mustard transition-all duration-300"
           >
-            View Programs
+            {hero.ctaSecondary.label}
           </motion.a>
         </motion.div>
 
-        {/* Stats bar */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.8 }}
-          className="mt-20 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
+          className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 md:gap-14"
         >
-          {[
-            { value: "500+", label: "Active Members" },
-            { value: "10+", label: "Expert Trainers" },
-            { value: "5000", label: "Sq. Ft. Gym Floor" },
-            { value: "4.9", label: "Google Rating" },
-          ].map((stat) => (
+          {hero.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="font-[family-name:var(--font-bebas-neue)] text-3xl sm:text-4xl text-mustard">
                 {stat.value}
@@ -136,12 +154,11 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 sm:bottom-6"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
