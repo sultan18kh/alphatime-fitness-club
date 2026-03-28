@@ -4,53 +4,32 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { siteContent } from "@/data/content";
 
-const testimonials = [
-  {
-    name: "Hassan Raza",
-    role: "Member for 2 Years",
-    text: "AlphaTime completely changed my approach to training. The old-school atmosphere, heavy iron, and no-nonsense coaching pushed me to levels I never thought possible. Gained 15kg of muscle in my first year.",
-    rating: 5,
-  },
-  {
-    name: "Ayesha Khan",
-    role: "Ladies Section Member",
-    text: "As a woman, finding a gym where I feel both comfortable and challenged was difficult. AlphaTime's ladies section is incredible — the trainers are supportive, the equipment is top-notch, and the results speak for themselves.",
-    rating: 5,
-  },
-  {
-    name: "Usman Ali",
-    role: "Competitive Powerlifter",
-    text: "The best gym in Lahore for serious lifters. Period. The power racks, deadlift platforms, and coaching staff understand what it takes to build real strength. This is home.",
-    rating: 5,
-  },
-  {
-    name: "Sana Mirza",
-    role: "Fitness Enthusiast",
-    text: "The cleanliness and professionalism at AlphaTime sets it apart from every other gym I've tried. The trainers genuinely care about your progress and the vibe is incredibly motivating.",
-    rating: 5,
-  },
-];
+const { testimonials } = siteContent;
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
 
-  const next = () => setCurrent((c) => (c + 1) % testimonials.length);
+  const next = () => setCurrent((c) => (c + 1) % testimonials.reviews.length);
   const prev = () =>
-    setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
+    setCurrent((c) => (c - 1 + testimonials.reviews.length) % testimonials.reviews.length);
+
+  const review = testimonials.reviews[current];
 
   return (
     <section id="testimonials" className="relative py-20 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-20">
           <span className="text-mustard text-xs uppercase tracking-[0.4em]">
-            Testimonials
+            {testimonials.label}
           </span>
           <h2 className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl text-white mt-4">
-            MEMBER <span className="gradient-text">VOICES</span>
+            {testimonials.headingMain}{" "}
+            <span className="gradient-text">{testimonials.headingAccent}</span>
           </h2>
           <p className="text-gray-text text-lg max-w-2xl mx-auto mt-6 leading-relaxed">
-            Don&apos;t take our word for it &mdash; hear from the people who train here.
+            {testimonials.description}
           </p>
         </AnimatedSection>
 
@@ -67,23 +46,21 @@ export default function Testimonials() {
               <Quote className="w-12 h-12 text-mustard/20 mx-auto mb-8" />
 
               <p className="text-xl sm:text-2xl md:text-3xl text-white/90 leading-relaxed mb-10 font-light">
-                &ldquo;{testimonials[current].text}&rdquo;
+                &ldquo;{review.text}&rdquo;
               </p>
 
               {/* Stars */}
               <div className="flex items-center justify-center gap-1 mb-4">
-                {Array.from({ length: testimonials[current].rating }).map(
-                  (_, i) => (
-                    <div key={i} className="w-2 h-2 bg-mustard" />
-                  )
-                )}
+                {Array.from({ length: review.rating }).map((_, i) => (
+                  <div key={i} className="w-2 h-2 bg-mustard" />
+                ))}
               </div>
 
               <h4 className="font-[family-name:var(--font-bebas-neue)] text-2xl tracking-wider text-white">
-                {testimonials[current].name}
+                {review.name}
               </h4>
               <p className="text-mustard/60 text-xs uppercase tracking-wider mt-1">
-                {testimonials[current].role}
+                {review.role}
               </p>
             </motion.div>
           </AnimatePresence>
@@ -101,7 +78,7 @@ export default function Testimonials() {
 
             {/* Dots */}
             <div className="flex items-center gap-2">
-              {testimonials.map((_, i) => (
+              {testimonials.reviews.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}
