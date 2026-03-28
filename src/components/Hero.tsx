@@ -62,8 +62,11 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.45, ease: "easeOut" }}
               className="shrink-0"
             >
-              <div className="relative h-24 w-24 overflow-hidden rounded-full border border-mustard/25 bg-black/55 shadow-[0_0_40px_rgba(212,160,23,0.18)] backdrop-blur-md sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-[17rem] lg:w-[17rem] xl:h-[19rem] xl:w-[19rem]">
-                <div className="absolute inset-2.5 overflow-hidden rounded-full sm:inset-3 md:inset-3.5 lg:inset-7 xl:inset-8">
+              <div
+                className="relative overflow-hidden rounded-full border border-mustard/25 bg-black/55 shadow-[0_0_40px_rgba(212,160,23,0.18)] backdrop-blur-md"
+                style={{ width: "clamp(6rem, 25vh, 19rem)", height: "clamp(6rem, 25vh, 19rem)" }}
+              >
+                <div className="absolute inset-[10%] overflow-hidden rounded-full">
                   <Image
                     src={heroLogo}
                     alt={`${brand.name} ${brand.subtitle} logo`}
@@ -73,7 +76,7 @@ export default function Hero() {
                     className="object-contain"
                   />
                 </div>
-                <div className="pointer-events-none absolute inset-2.5 z-10 rounded-full border border-mustard/12 lg:inset-4 xl:inset-5" />
+                <div className="pointer-events-none absolute inset-[8%] z-10 rounded-full border border-mustard/12" />
               </div>
             </motion.div>
           )}
@@ -84,7 +87,8 @@ export default function Hero() {
                 initial={{ y: 120 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[10rem] leading-[0.85] text-white"
+                className="font-[family-name:var(--font-bebas-neue)] leading-[0.85] text-white"
+                style={{ fontSize: "clamp(3rem, 13vh, 10rem)" }}
               >
                 {hero.headingLine1}
               </motion.h1>
@@ -158,7 +162,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5 }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 sm:bottom-6"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 sm:bottom-8"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -3,63 +3,18 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Dumbbell, MapPin } from "lucide-react";
-import { siteContent } from "@/data/content";
 import { InstagramIcon, FacebookIcon, TikTokIcon } from "./SocialIcons";
+import { siteContent } from "@/data/content";
+import type { ComponentType } from "react";
 
-const footerLinks = [
-  {
-    title: "GYM",
-    links: [
-      { name: "About Us", href: "#about" },
-      { name: "Facilities", href: "#facilities" },
-      { name: "Gallery", href: "#gallery" },
-      { name: "Contact", href: "#contact" },
-    ],
-  },
-  {
-    title: "TRAINING",
-    links: [
-      { name: "Programs", href: "#programs" },
-      { name: "Trainers", href: "#trainers" },
-      { name: "Pricing", href: "#pricing" },
-      { name: "Personal Training", href: "#contact" },
-    ],
-  },
-  {
-    title: "CONNECT",
-    links: [
-      { name: "Instagram", href: "https://www.instagram.com/alphatimefitnessclub/" },
-      { name: "Facebook", href: "https://www.facebook.com/AlphaTimeFitnessclub/" },
-      { name: "TikTok", href: "https://www.tiktok.com/@alphatimefitnessclub" },
-      { name: "Google Maps", href: "https://share.google/lVrFAL37AdFCGKQVt" },
-    ],
-  },
-];
+const { brand, social, footer } = siteContent;
 
-const socials = [
-  {
-    icon: InstagramIcon,
-    href: "https://www.instagram.com/alphatimefitnessclub/",
-    label: "Instagram",
-  },
-  {
-    icon: FacebookIcon,
-    href: "https://www.facebook.com/AlphaTimeFitnessclub/",
-    label: "Facebook",
-  },
-  {
-    icon: TikTokIcon,
-    href: "https://www.tiktok.com/@alphatimefitnessclub",
-    label: "TikTok",
-  },
-  {
-    icon: MapPin,
-    href: "https://share.google/lVrFAL37AdFCGKQVt",
-    label: "Google Maps",
-  },
-];
-
-const { brand } = siteContent;
+const socialIconMap: Record<string, ComponentType<{ className?: string }>> = {
+  instagram: InstagramIcon,
+  facebook: FacebookIcon,
+  tiktok: TikTokIcon,
+  google_maps: MapPin,
+};
 
 export default function Footer() {
   return (
@@ -74,13 +29,13 @@ export default function Footer() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-6xl md:text-7xl text-white mb-4">
-              YOUR TRANSFORMATION
+              {footer.ctaHeadingLine1}
             </h2>
             <h2 className="font-[family-name:var(--font-bebas-neue)] text-4xl sm:text-6xl md:text-7xl gradient-text mb-8">
-              STARTS TODAY
+              {footer.ctaHeadingLine2}
             </h2>
             <motion.a
-              href="#contact"
+              href={footer.ctaHref}
               whileHover={{
                 scale: 1.05,
                 boxShadow: "0 0 40px rgba(212,160,23,0.3)",
@@ -88,7 +43,7 @@ export default function Footer() {
               whileTap={{ scale: 0.95 }}
               className="inline-block px-12 py-4 bg-mustard text-black font-bold text-sm uppercase tracking-[0.2em] hover:bg-mustard-light transition-colors duration-300"
             >
-              Join AlphaTime
+              {footer.ctaLabel}
             </motion.a>
           </motion.div>
         </div>
@@ -126,31 +81,33 @@ export default function Footer() {
               </div>
             </a>
             <p className="text-gray-text text-sm leading-relaxed mb-6 max-w-sm">
-              Lahore&apos;s home for real muscle building. A modern gym with
-              old-school values — for ladies &amp; gents who show up to grind.
+              {footer.description}
             </p>
 
             {/* Social Icons */}
             <div className="flex items-center gap-3">
-              {socials.map((social) => (
-                <motion.a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-10 h-10 border border-dark-border flex items-center justify-center hover:border-mustard/50 hover:bg-mustard/5 transition-all duration-300 text-gray-text hover:text-mustard"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-4 h-4" />
-                </motion.a>
-              ))}
+              {social.map((s) => {
+                const Icon = socialIconMap[s.platform] ?? MapPin;
+                return (
+                  <motion.a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="w-10 h-10 border border-dark-border flex items-center justify-center hover:border-mustard/50 hover:bg-mustard/5 transition-all duration-300 text-gray-text hover:text-mustard"
+                    aria-label={s.label}
+                  >
+                    <Icon className="w-4 h-4" />
+                  </motion.a>
+                );
+              })}
             </div>
           </div>
 
           {/* Links */}
-          {footerLinks.map((section) => (
+          {footer.linkGroups.map((section) => (
             <div key={section.title}>
               <h4 className="font-[family-name:var(--font-bebas-neue)] text-lg tracking-wider text-white mb-4">
                 {section.title}
@@ -175,6 +132,27 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+
+          {/* Connect — social links as a third column */}
+          <div>
+            <h4 className="font-[family-name:var(--font-bebas-neue)] text-lg tracking-wider text-white mb-4">
+              CONNECT
+            </h4>
+            <ul className="space-y-3">
+              {social.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-text text-sm hover:text-mustard transition-colors duration-300"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -182,11 +160,10 @@ export default function Footer() {
       <div className="border-t border-dark-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-text text-xs">
-            &copy; {new Date().getFullYear()} AlphaTime Fitness Club. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} {footer.copyright}
           </p>
           <p className="text-gray-text/40 text-xs italic">
-            No shortcuts. No excuses. Just iron.
+            {brand.motto}
           </p>
         </div>
       </div>

@@ -2,37 +2,12 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { MapPin, Phone, Clock, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { getIcon } from "./IconResolver";
+import { siteContent } from "@/data/content";
 
-const contactInfo = [
-  {
-    icon: MapPin,
-    title: "LOCATION",
-    details: [
-      "2nd Floor, Cakes and Bakes Building",
-      "Ali View Garden, Nadirabad",
-      "Lahore 54000, Pakistan",
-    ],
-  },
-  {
-    icon: Clock,
-    title: "HOURS",
-    details: [
-      "Mon - Sat: 6:00 AM - 11:00 PM",
-      "Ladies Hours: 10AM - 2PM",
-    ],
-  },
-  {
-    icon: Phone,
-    title: "CONTACT",
-    details: [
-      "Call for inquiries",
-      "DM us on Instagram",
-      "@alphatimefitnessclub",
-    ],
-  },
-];
+const { contact } = siteContent;
 
 export default function Contact() {
   const ref = useRef(null);
@@ -55,14 +30,14 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-20">
           <span className="text-mustard text-xs uppercase tracking-[0.4em]">
-            Get In Touch
+            {contact.label}
           </span>
           <h2 className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl text-white mt-4">
-            JOIN THE <span className="gradient-text">PACK</span>
+            {contact.headingMain}{" "}
+            <span className="gradient-text">{contact.headingAccent}</span>
           </h2>
           <p className="text-gray-text text-lg max-w-2xl mx-auto mt-6 leading-relaxed">
-            Ready to start? Drop us a message or visit the gym. Your transformation
-            starts with one step.
+            {contact.description}
           </p>
         </AnimatedSection>
 
@@ -70,29 +45,32 @@ export default function Contact() {
           {/* Contact Info + Map */}
           <div>
             <div className="space-y-8 mb-10">
-              {contactInfo.map((info, i) => (
-                <motion.div
-                  key={info.title}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 0.6, delay: i * 0.15 }}
-                  className="flex gap-5"
-                >
-                  <div className="flex-shrink-0 w-12 h-12 bg-dark-card border border-dark-border flex items-center justify-center">
-                    <info.icon className="w-5 h-5 text-mustard" />
-                  </div>
-                  <div>
-                    <h4 className="font-[family-name:var(--font-bebas-neue)] text-lg tracking-wider text-white mb-2">
-                      {info.title}
-                    </h4>
-                    {info.details.map((detail) => (
-                      <p key={detail} className="text-gray-text text-sm leading-relaxed">
-                        {detail}
-                      </p>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
+              {contact.info.map((info, i) => {
+                const Icon = getIcon(info.iconName);
+                return (
+                  <motion.div
+                    key={info.title}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ duration: 0.6, delay: i * 0.15 }}
+                    className="flex gap-5"
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 bg-dark-card border border-dark-border flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-mustard" />
+                    </div>
+                    <div>
+                      <h4 className="font-[family-name:var(--font-bebas-neue)] text-lg tracking-wider text-white mb-2">
+                        {info.title}
+                      </h4>
+                      {info.details.map((detail) => (
+                        <p key={detail} className="text-gray-text text-sm leading-relaxed">
+                          {detail}
+                        </p>
+                      ))}
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* Google Maps Embed */}
@@ -103,7 +81,7 @@ export default function Contact() {
               className="relative aspect-video bg-dark-card border border-dark-border overflow-hidden"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.0911500821526!2d74.40456929999999!3d31.494178299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919054b14f0c6bb%3A0x527c71b017d1f37c!2sAlphatime%20Fitness%20Club%20(Gym%20for%20Ladies%20%26%20Gents)!5e0!3m2!1sen!2s!4v1774658676110!5m2!1sen!2s"
+                src={contact.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "invert(90%) hue-rotate(180deg) brightness(0.8) contrast(1.2)" }}
@@ -185,13 +163,7 @@ export default function Contact() {
                   Interested In
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Muscle Building",
-                    "Strength Training",
-                    "Personal Training",
-                    "Ladies Fitness",
-                    "Body Transformation",
-                  ].map((option) => (
+                  {contact.interests.map((option) => (
                     <button
                       key={option}
                       type="button"
@@ -213,7 +185,7 @@ export default function Contact() {
                 className="w-full py-4 bg-mustard text-black font-bold text-sm uppercase tracking-[0.2em] hover:bg-mustard-light transition-colors duration-300 flex items-center justify-center gap-3"
               >
                 <Send className="w-4 h-4" />
-                Send Message
+                {contact.submitLabel}
               </motion.button>
             </form>
           </motion.div>

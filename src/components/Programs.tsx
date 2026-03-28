@@ -4,49 +4,9 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { siteContent } from "@/data/content";
 
-const programs = [
-  {
-    number: "01",
-    title: "MUSCLE BUILDING",
-    subtitle: "Hypertrophy & Size",
-    description:
-      "Science-backed hypertrophy programs designed for maximum muscle growth. Progressive overload, volume management, and periodization for serious gains.",
-    tags: ["Hypertrophy", "Size", "Volume"],
-  },
-  {
-    number: "02",
-    title: "STRENGTH TRAINING",
-    subtitle: "Power & Performance",
-    description:
-      "Powerlifting-style compound movement programs. Squat, bench, deadlift — build raw, functional strength that translates to everything.",
-    tags: ["Powerlifting", "Compounds", "Strength"],
-  },
-  {
-    number: "03",
-    title: "BODY TRANSFORMATION",
-    subtitle: "Complete Overhaul",
-    description:
-      "Tailored plans for beginners and intermediates looking to completely transform their physique. Nutrition guidance included.",
-    tags: ["Fat Loss", "Muscle Gain", "Nutrition"],
-  },
-  {
-    number: "04",
-    title: "LADIES FITNESS",
-    subtitle: "Strength & Toning",
-    description:
-      "Dedicated programs for women. Build strength, sculpt muscle, and develop confidence in a supportive environment.",
-    tags: ["Women", "Strength", "Toning"],
-  },
-  {
-    number: "05",
-    title: "PERSONAL TRAINING",
-    subtitle: "1-on-1 Coaching",
-    description:
-      "One-on-one sessions with expert trainers. Custom programming, form correction, and accountability to fast-track your results.",
-    tags: ["Custom", "Coaching", "1-on-1"],
-  },
-];
+const { programs } = siteContent;
 
 export default function Programs() {
   const ref = useRef(null);
@@ -57,19 +17,19 @@ export default function Programs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-20">
           <span className="text-mustard text-xs uppercase tracking-[0.4em]">
-            Training Programs
+            {programs.label}
           </span>
           <h2 className="font-[family-name:var(--font-bebas-neue)] text-5xl sm:text-7xl md:text-8xl text-white mt-4">
-            FORGE YOUR <span className="gradient-text">PATH</span>
+            {programs.headingMain}{" "}
+            <span className="gradient-text">{programs.headingAccent}</span>
           </h2>
           <p className="text-gray-text text-lg max-w-2xl mx-auto mt-6 leading-relaxed">
-            Whether you&apos;re chasing size, strength, or a complete transformation
-            &mdash; we have a program built for you.
+            {programs.description}
           </p>
         </AnimatedSection>
 
         <div ref={ref} className="space-y-4 max-w-6xl mx-auto">
-          {programs.map((program, i) => (
+          {programs.items.map((program, i) => (
             <motion.div
               key={program.number}
               initial={{ opacity: 0, x: -40 }}

@@ -13,19 +13,16 @@ const bebasNeue = Bebas_Neue({
   subsets: ["latin"],
 });
 
+// Note: metadata must be static in server components, so we import the content
+// directly rather than using the siteContent object at runtime.
+import { siteContent } from "@/data/content";
+
+const { meta } = siteContent;
+
 export const metadata: Metadata = {
-  title: "AlphaTime Fitness Club | Where Strength Meets Discipline",
-  description:
-    "Lahore's premier old-school muscle building gym for ladies & gents. Heavy iron, expert trainers, real results. No shortcuts, no excuses — just iron.",
-  keywords: [
-    "gym",
-    "fitness",
-    "muscle building",
-    "Lahore",
-    "bodybuilding",
-    "strength training",
-    "AlphaTime",
-  ],
+  title: meta.title,
+  description: meta.description,
+  keywords: meta.keywords,
 };
 
 export default function RootLayout({
