@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Dumbbell, MapPin } from "lucide-react";
+import { siteContent } from "@/data/content";
 import { InstagramIcon, FacebookIcon, TikTokIcon } from "./SocialIcons";
 
 const footerLinks = [
@@ -57,6 +59,8 @@ const socials = [
   },
 ];
 
+const { brand } = siteContent;
+
 export default function Footer() {
   return (
     <footer className="relative bg-black border-t border-dark-border">
@@ -100,13 +104,24 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-2">
             <a href="#" className="flex items-center gap-3 mb-6">
-              <Dumbbell className="w-7 h-7 text-mustard" />
+              {brand.logo ? (
+                <Image
+                  src={brand.logo}
+                  alt={`${brand.name} ${brand.subtitle} logo`}
+                  width={40}
+                  height={40}
+                  sizes="40px"
+                  className="h-10 w-10 object-contain"
+                />
+              ) : (
+                <Dumbbell className="w-7 h-7 text-mustard" />
+              )}
               <div className="flex flex-col">
                 <span className="font-[family-name:var(--font-bebas-neue)] text-2xl tracking-wider text-white leading-none">
-                  ALPHATIME
+                  {brand.name}
                 </span>
                 <span className="text-[10px] tracking-[0.3em] text-mustard/80 uppercase">
-                  Fitness Club
+                  {brand.subtitle}
                 </span>
               </div>
             </a>

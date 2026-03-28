@@ -1,18 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Dumbbell } from "lucide-react";
+import { siteContent } from "@/data/content";
 
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Facilities", href: "#facilities" },
-  { name: "Programs", href: "#programs" },
-  { name: "Trainers", href: "#trainers" },
-  { name: "Pricing", href: "#pricing" },
-  { name: "Gallery", href: "#gallery" },
-  { name: "Contact", href: "#contact" },
-];
+const { nav, brand } = siteContent;
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,27 +31,38 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <motion.div
-              whileHover={{ rotate: 15, scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
+              className="shrink-0"
             >
-              <Dumbbell className="w-8 h-8 text-mustard" />
+              {brand.logo ? (
+                <Image
+                  src={brand.logo}
+                  alt={`${brand.name} ${brand.subtitle} logo`}
+                  width={44}
+                  height={44}
+                  priority
+                  sizes="44px"
+                  className="h-11 w-11 object-contain"
+                />
+              ) : (
+                <Dumbbell className="w-8 h-8 text-mustard" />
+              )}
             </motion.div>
             <div className="flex flex-col">
               <span className="font-[family-name:var(--font-bebas-neue)] text-2xl tracking-wider text-white leading-none">
-                ALPHATIME
+                {brand.name}
               </span>
               <span className="text-[10px] tracking-[0.3em] text-mustard/80 uppercase">
-                Fitness Club
+                {brand.subtitle}
               </span>
             </div>
           </a>
 
-          {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link, i) => (
+            {nav.links.map((link, i) => (
               <motion.a
                 key={link.name}
                 href={link.href}
@@ -71,7 +76,7 @@ export default function Navbar() {
               </motion.a>
             ))}
             <motion.a
-              href="#contact"
+              href={nav.cta.href}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8 }}
@@ -79,11 +84,10 @@ export default function Navbar() {
               whileTap={{ scale: 0.95 }}
               className="ml-4 px-6 py-2.5 bg-mustard text-black font-bold text-sm uppercase tracking-wider hover:bg-mustard-light transition-colors duration-300"
             >
-              Join Now
+              {nav.cta.label}
             </motion.a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             className="lg:hidden text-white p-2"
@@ -93,7 +97,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -104,7 +107,7 @@ export default function Navbar() {
             className="lg:hidden bg-black/95 backdrop-blur-xl border-t border-mustard/10 overflow-hidden"
           >
             <div className="px-4 py-6 space-y-1">
-              {navLinks.map((link, i) => (
+              {nav.links.map((link, i) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
@@ -118,11 +121,11 @@ export default function Navbar() {
                 </motion.a>
               ))}
               <a
-                href="#contact"
+                href={nav.cta.href}
                 onClick={() => setIsMobileOpen(false)}
                 className="block mx-4 mt-4 px-6 py-3 bg-mustard text-black font-bold text-sm uppercase tracking-wider text-center hover:bg-mustard-light transition-colors"
               >
-                Join Now
+                {nav.cta.label}
               </a>
             </div>
           </motion.div>
