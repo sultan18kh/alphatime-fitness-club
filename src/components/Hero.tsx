@@ -65,7 +65,7 @@ export default function Hero() {
             >
               <div
                 className="relative overflow-hidden rounded-full border border-mustard/25 bg-black/55 shadow-[0_0_40px_rgba(212,160,23,0.18)] backdrop-blur-md"
-                style={{ width: "clamp(6rem, 28vh, 19rem)", height: "clamp(6rem, 28vh, 19rem)" }}
+                style={{ width: "clamp(6rem, 32vh, 19rem)", height: "clamp(6rem, 32vh, 19rem)" }}
               >
                 <div className="absolute inset-[10%] overflow-hidden rounded-full">
                   <Image
@@ -89,7 +89,7 @@ export default function Hero() {
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="font-[family-name:var(--font-bebas-neue)] leading-[0.85] text-white"
-                style={{ fontSize: "clamp(3rem, 13vh, 10rem)" }}
+                style={{ fontSize: "clamp(3rem, 15vh, 10rem)" }}
               >
                 {hero.headingLine1}
               </motion.h1>
@@ -100,7 +100,7 @@ export default function Hero() {
                 animate={{ y: 0 }}
                 transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="font-[family-name:var(--font-bebas-neue)] leading-[0.85] gradient-text"
-                style={{ fontSize: "clamp(3rem, 13vh, 10rem)" }}
+                style={{ fontSize: "clamp(3rem, 15vh, 10rem)" }}
               >
                 {hero.headingLine2}
               </motion.h1>
