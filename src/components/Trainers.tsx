@@ -6,13 +6,9 @@ import { motion, useInView } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { InstagramIcon } from "./SocialIcons";
 import { siteContent } from "@/data/content";
+import { getImagePath } from "@/utils/getImagePath";
 
 const { trainers, brand } = siteContent;
-
-function getImagePath(image: string | null) {
-  if (!image) return null;
-  return image.startsWith("/") ? image : `/${image}`;
-}
 
 export default function Trainers() {
   const ref = useRef(null);

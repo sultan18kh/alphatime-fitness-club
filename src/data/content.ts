@@ -681,7 +681,7 @@ export const siteContent: SiteContent = {
       },
     ],
     mapEmbedUrl:
-      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.5!2d74.35!3d31.52!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDMxJzEyLjAiTiA3NMKwMjEnMDAuMCJF!5e0!3m2!1sen!2spk!4v1",
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.0911500821526!2d74.40456929999999!3d31.494178299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3919054b14f0c6bb%3A0x527c71b017d1f37c!2sAlphatime%20Fitness%20Club%20(Gym%20for%20Ladies%20%26%20Gents)!5e0!3m2!1sen!2s!4v1774658676110!5m2!1sen!2s",
     formFields: [
       { name: "name", label: "Full Name", type: "text", placeholder: "Your name", colSpan: 2 },
       { name: "email", label: "Email", type: "email", placeholder: "your@email.com", colSpan: 1 },

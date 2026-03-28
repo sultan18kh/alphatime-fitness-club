@@ -5,13 +5,9 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { siteContent } from "@/data/content";
+import { getImagePath } from "@/utils/getImagePath";
 
 const { gallery, brand } = siteContent;
-
-function getImagePath(image: string | null) {
-  if (!image) return null;
-  return image.startsWith("/") ? image : `/${image}`;
-}
 
 export default function Gallery() {
   const ref = useRef(null);
@@ -39,6 +35,9 @@ export default function Gallery() {
         >
           {gallery.items.map((item, i) => {
             const imageSrc = getImagePath(item.image);
+            const imageSizes = item.span.includes("col-span-2")
+              ? "(max-width: 768px) 100vw, 50vw"
+              : "(max-width: 768px) 50vw, 25vw";
 
             return (
               <motion.div
@@ -54,7 +53,7 @@ export default function Gallery() {
                       src={imageSrc}
                       alt={`${item.title} ${item.subtitle}`}
                       fill
-                      sizes="(max-width: 768px) 50vw, 25vw"
+                      sizes={imageSizes}
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
